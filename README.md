@@ -113,3 +113,93 @@ Apache Maven is a software project management and comprehension tool. A build au
             
  <ul><li><b>How Maven searches for dependency JAR?</b></li></ul>
      Maven searches first for a dependency JAR in local repository. If found it is used else maven looks st the remote repository and        download the corresponding version of JAR file and then stores it into local repository.
+ 
+ <ul><li><b>Explain package phase in Maven build lifecycle.</b></li><ul>
+    package phase pulls the compiled code and package it to a distributable format, such as a JAR.
+    The below is the command to package a maven project.
+
+    mvn -package  
+    
+ <ul><li><b>What are the build lifecycles of Maven?</b><li></ul>
+     There are 3 built-in build lifecycles.
+
+    The default lifecycle handles your project deployment.
+    the clean lifecycle handles project cleaning.
+    the site lifecycle handles the creation of the project's site documentation.
+    
+ <ul><li><b>What is local repository in Maven?</b></li></ul>
+    Maven local repository is located in your local system and is created by the maven when you run any maven command.
+
+    By default, maven local repository is %USER_HOME%/.m2 directory.
+
+    We can change the location of maven local repository by changing the settings.xml file. It is located in MAVEN_HOME/conf.
+ 
+ <ul><li><b>What is Maven Central Repository?</b></li></ul>
+     Maven central repository is located on the web created by the apache maven community.
+
+    The path of central repository is: http://repo1.maven.org/maven2/.   
+ 
+ <ul><li><b>Explain Maven remote repository</b></li></ul>
+     Remote repositories refer to any other type of repository, accessed by a variety of protocols such as file:// and http://. These       repositories are set up by a third party to provide their artifacts for downloading.
+
+    A "remote" repository may also be an internal repository set up on a file or HTTP server within an organization, used to share           private artifacts between development teams and for releases.
+  
+  <ul><li><b>How do I include dependencies in a jar using Maven?</b></li></ul>
+      Using jar-with-dependencies as the descriptorRef of your assembly-plugin configuration, we can create a JAR along its                   dependencies.
+      This built-in descriptor creates an assembly with the classifier jar-with-dependencies using the JAR archive format.
+      Below is the subset of pom.xml that includes assembly-plugin configuration along with jar-with-dependencies descriptor.
+                        <build>
+                        <plugins>
+                          <!-- other plugin configuration -->
+                          <plugin>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <executions>
+                              <execution>
+                                <phase>package</phase>
+                                <goals>
+                                  <goal>single</goal>
+                                </goals>
+                              </execution>
+                            </executions>
+                            <configuration>
+                              <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                              </descriptorRefs>
+                            </configuration>
+                          </plugin>
+                        </plugins>
+                      </build>
+                      
+ <ul><li><b>Configuring resource directories in Maven.</b></li></ul>
+        By default, Maven configures and lookup into the src/main/resources directory for your project resources.
+        Also additional resources directories could be specified by adding the configuration to the project's Pom.xml.
+                <project>
+                 ...
+                 <build>
+                   ...
+                  <resources>
+                   <resource>
+                    <directory>
+                     src/proj_resources
+                    </directory>
+                   </resource>
+                </resources>
+                 ...
+                 </build>
+                 ...
+                </project>
+                
+ <ul><li><b>Difference between repository and dependency in Maven.</b></li></ul>
+        Repository is a collection of artifacts (eg: jars). You can think of it as a mere storage / cache of various artifacts.
+        Dependency is a situation where your project dependent on another artifact to perform its task. (For example., compile, run,             unit test etc.)
+                
+<ul><li><b>What is an Archetype in Maven framework?</b></li></ul>
+        Archetype is a Maven plugin that creates a project structure as per its template.
+        The below is the command to create a new maven project based on an archetype.
+
+            mvn archetype:generate
+<ul><li><b>What is goal in Maven?</b></li></ul>
+        A maven goal represents a specific task that contributes to the building and managing of a Maven project. It may be bound to             zero or more build phases.
+        A goal that does not bound to any build phase could be executed outside of the build lifecycle by direct invocation.
+
+ 
